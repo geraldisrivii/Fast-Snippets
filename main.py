@@ -37,4 +37,3 @@ with open(path, encoding='utf-8') as snippets_file:
     for index in range(len(finally_array)):
         dictionary[list_prefixes[index]] = finally_array[index]
     print(dictionary)
-print("Hello")
