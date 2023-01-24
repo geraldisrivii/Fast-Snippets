@@ -1,6 +1,5 @@
-"Hello"
-Hello
-    Hello
+<p class="text-in-card">text-in-card</p>
+    <p class="text-in-card">text-in-card</p>
+        <p class="text-in-card">text-in-card</p>
 !
-"Hi"
-    Hi
+<h4 class="header-programm-card_front">header-programm-card_front</h4>

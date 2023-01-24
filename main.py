@@ -2,22 +2,27 @@ import json
 path: str
 array_str = []
 count_files = 0
+# ! Open file that contain path to snippets json.
 with open('programm_data.json') as programm_file:
     programm_data = json.load(programm_file)
+    # Get path to json
     path = programm_data["path_to_snippet"]
+    # ! Open file.txt - file which contain not converted body for snippets.
 with open('file.txt', encoding='utf-8') as main_file:
     array_str = main_file.readlines()
     new_array = []
     for element in array_str:
-        if (element[0] == " "):
-            element = '\t' + element[4:]
-            new_array.append(element.strip('\n'))
+        if (element.count(' ') > 4):
+            element = element.strip('\n').rstrip(' ')
+            count = element.count(' ')
+            element = "\t" * (count // 4) + element[count - 1:]
+            new_array.append(element)
         elif (element[0] == "!"):
             new_array.append("!")
             count_files += 1
         else:
             new_array.append(element.strip('\n'))
-        if(i:= element.find('"')):
+        if (i := element.find('"')):
             element = element[:i] + "\"" + element[i:]
 with open(path, encoding='utf-8', mode='r+') as snippets_file:
     snippets = json.load(snippets_file)
@@ -31,7 +36,6 @@ with open(path, encoding='utf-8', mode='r+') as snippets_file:
         else:
             sub_array.append(new_array[i])
     finally_array.append(sub_array)
-    print(finally_array)
     print(f"Count of accepted elements: {len(finally_array)}")
     print("Please, input prefixes to all snippets in sort of have added elements. Input prefixeses throught '.'")
     list_prefixes = input().split()
@@ -42,4 +46,4 @@ with open(path, encoding='utf-8', mode='r+') as snippets_file:
         }
     print("OK")
 with open(path, encoding='utf-8', mode='w') as last_file:
-    json.dump(snippets,last_file, indent=2)
+    json.dump(snippets, last_file, indent=2)
