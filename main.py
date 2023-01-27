@@ -16,7 +16,11 @@ with open('file.txt', encoding='utf-8') as main_file:
             new_array.append("!")
             count_files += 1
         else:
-            new_array.append(element.strip('\n'))
+            if ((i1 := element.find('$')) > 0):
+                element = element[:i1] + "$" + element[i1:]
+                new_array.append(element.strip('\n'))
+            else:
+                new_array.append(element.strip('\n'))
         if (i := element.find('"')):
             element = element[:i] + "\"" + element[i:]
 with open(path, encoding='utf-8', mode='r+') as snippets_file:
@@ -24,8 +28,8 @@ with open(path, encoding='utf-8', mode='r+') as snippets_file:
     finally_array = []
     sub_array = []
     for i in range(len(new_array)):
+        new_array[i] = str(new_array[i]).strip('\n')
         if (new_array[i] == "!"):
-            sub_array[i - 1] = str(sub_array[i - 1]).strip('\n')
             finally_array.append(sub_array)
             sub_array = []
         else:
