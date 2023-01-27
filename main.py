@@ -12,12 +12,7 @@ with open('file.txt', encoding='utf-8') as main_file:
     array_str = main_file.readlines()
     new_array = []
     for element in array_str:
-        if (element.count(' ') > 4):
-            element = element.strip('\n').rstrip(' ')
-            count = element.count(' ')
-            element = "\t" * (count // 4) + element[count - 1:]
-            new_array.append(element)
-        elif (element[0] == "!"):
+        if (element[0] == "!"):
             new_array.append("!")
             count_files += 1
         else:
